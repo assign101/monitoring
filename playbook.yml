@@ -1,0 +1,44 @@
+---
+- hosts: alertmanager
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - alertmanager
+
+- hosts: node_exporter
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - prometheus_node_exporter
+
+- hosts: etcd
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - prometheus_node_exporter
+
+- hosts: prometheus
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - prometheus
+
+- hosts: grafana
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - grafana
+
+- hosts: node_exporter
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - prometheus_process_exporter
+
+#ansible-playbook playbook.yml -i inventory --private-key=~/.ssh/opendev-admin.pem -e ansible_ssh_user=ec2-user
